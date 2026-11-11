@@ -99,7 +99,7 @@ Entry points are research scripts with configuration values in their source, not
 
 The main manuscript experiments report 50 Monte Carlo samples for training reward estimation and 10,000 for final influence evaluation. The local revision experiments used a separate configuration: equal transmission probabilities of 0.03, horizon 30, target-priority simultaneous activation, 600 training episodes, 50 reward samples, 1,000 final-evaluation samples, and five independent repetitions. The main manuscript describes competitor-priority activation. These mechanisms and sample budgets must not be conflated.
 
-The revision experiments' portable runners, checkpoint/resume utilities, statistical reports, and additional data are **not currently included in this checkout**. Do not assume that the legacy scripts implement those runners or their exact configuration. In particular, changing a description in the manuscript does not change the behavior of a script.
+The revision experiments' portable runners and frozen plans are now included under `revision_experiments/`; data and curated evidence are published as release assets. Do not assume that the legacy scripts implement those runners or their exact configuration. In particular, changing a description in the manuscript does not change the behavior of a script.
 
 For reproducible results, record the exact commit, package versions, input files, node ordering, random seeds, diffusion/tie-breaking rules, training budget, and independent repetition count. Report across-repetition standard deviations separately from Monte Carlo variability within a run. Runtime comparisons should state whether distance preprocessing, training, inference, and final evaluation are included, and should identify the hardware used.
 
