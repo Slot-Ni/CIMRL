@@ -114,3 +114,38 @@ If using this code, cite the associated manuscript by its title above. Publicati
 ## Fixed reproducibility release
 
 Revision runners and frozen plans are now included in `revision_experiments/`. Download processed matrices, node mappings, ten-order caches and curated evidence from https://github.com/Slot-Ni/CIMRL/releases/tag/reproducibility-20261111 . See [reproducibility/README.md](reproducibility/README.md) for SHA-256 verification, portable commands, scope and known discrepancies. This supersedes the earlier statement that revision runners are not included. Weights and all historical outputs are not supplied. Cite the full commit linked by the release tag; d4632baf44c5679a68691b2b1e0152a49f99f0b9 identifies the earlier legacy code only.
+
+## Reproduce the revision experiments
+
+1. Obtain the fixed source version: `git checkout reproducibility-20261111` (published baseline); the newer `reproducibility-guide-20261111` tag adds the portable dispatcher documented below. Use the latter for these commands and record `git rev-parse HEAD`.
+2. Download all three ZIP files from the [data release](https://github.com/Slot-Ni/CIMRL/releases/tag/reproducibility-20261111).
+3. Run `python reproducibility/verify_downloads.py /path/to/downloads` before extracting. Extract matrices and caches next to the repository as described in the guide.
+4. Install `numpy scipy torch tqdm` for revision runners. Legacy plotting scripts additionally use requirements.txt. See the captured environment and limitations in the guide.
+5. Validate the chosen plan, then explicitly request training:
+
+```bash
+python reproducibility/run_experiment.py c04_real_extension
+python reproducibility/run_experiment.py c04_real_extension --run --workers 3
+python reproducibility/run_experiment.py c04_real_extension --merge
+```
+
+The first command only checks source/input hashes. `--run` starts training. `--merge` audits all completed task receipts and writes merged tables alongside the output folder; incomplete merges fail instead of silently treating missing tasks as zero. Default output: `reproduced_results/<experiment>/`. Override data/cache paths with `--data-root` and `--cache-root`; override output with `--output`. Logs and checkpoint files are inside task-ID folders.
+
+| Experiment key | Scope | Planned tasks |
+|---|---|---:|
+| c04_original | Historical combined C04/C05/C07 plan on Algebra/HCL; includes expensive S2V, not only sensitivity | 140 |
+| c04_real_extension | Bars-Rev ratios .1/.4 and NDC five ratios, DQN | 35 |
+| c05_order_pair | First-order screening on Algebra/HCL; ten-order references are earlier runs | 10 |
+| c05_order_extension | Both orders on senate-committees, Restaurants-Rev, Geometry | 30 |
+| c05_order_round2 | Both orders on Music-Rev, NDC-classes, high-school_2012 | 30 |
+| c07_algebra | Shared-pool DQN/Greedy/S2V, five repetitions each | 15 |
+
+Use the same command/output to resume. Do not edit frozen source files or regenerate historical caches. A new full run can take many hours or days, especially S2V. Existing result evidence can be inspected without rerunning training; it deliberately omits model weights and intermediate features, so it cannot itself serve as a complete resumable output directory. For C05 paired analysis, the first-order tasks and historical ten-order references must both be retained. Bars-Rev's earlier ratios are in the server evidence, not among the 35 new tasks.
+
+### Configuration used by revision runners
+
+Product screening; default ratio .2 (C04 varies .05/.1/.2/.4/1); target budget10; orders10; alpha.5; equal beta.03; T30; target-priority ties; 600 episodes; 50 reward samples; 1000 held-out evaluation samples; five repeats. S2V uses32-dimensional embeddings and32 message-passing rounds. Full-space legacy S2V and same-pool revision S2V are distinct comparisons. Do not describe these samples as ten repetitions or 10000 evaluations.
+
+### Fixed citation
+
+Use a commit permalink, not only the moving main branch. The data-bearing baseline is commit `f91abd577e731faaf853ddbab5ba8a6e30370cad`; the `reproducibility-guide-20261111` release fixes the expanded execution guide and its source commit. No Zenodo DOI has been minted or claimed. See the release's linked commit for the exact newer hash.
