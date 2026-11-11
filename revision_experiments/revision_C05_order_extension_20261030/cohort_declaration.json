@@ -1,0 +1,247 @@
+{
+  "datasets": [
+    "senate-committees",
+    "Restaurants-Rev",
+    "Geometry"
+  ],
+  "total_new_tasks": 30,
+  "repeats": 5,
+  "screening_orders": [
+    1,
+    10
+  ],
+  "feature_orders": 10,
+  "selection_basis": "size and existing-cache availability; no outcome-based selection",
+  "original_networks_retained": [
+    "Algebra",
+    "synthetic_HCL_v1000_e1000_exp2.5_maxdeg10"
+  ],
+  "audit": [
+    {
+      "dataset": "senate-committees",
+      "shape": [
+        282,
+        315
+      ],
+      "pool_size": 56,
+      "overlap": 34,
+      "ordered_pools_identical": false,
+      "first_order_shared_edge_violations": 0,
+      "all_orders_shortest_paths_verified": false,
+      "matrix_sha256": "4ff2f8c13c506f68f7a3f7aa305a890862ad4dfc1d0887a520ad571c06ae9dad",
+      "cache_sources": [
+        {
+          "order": 1,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\senate-committees_distance_1.npy",
+          "size_bytes": 636320,
+          "sha256": "131283d0a73639541b224c8654e8f1031659db47ba27f80de53e4e80041d6f16"
+        },
+        {
+          "order": 2,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\senate-committees_distance_2.npy",
+          "size_bytes": 636320,
+          "sha256": "77ae9bf79aafa7c2dd349680e2c0425e01d79a5b08b4b46d070a9c09bc904167"
+        },
+        {
+          "order": 3,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\senate-committees_distance_3.npy",
+          "size_bytes": 636320,
+          "sha256": "047b4fc9e70e95b8b664846054809e79d77b7c3221eaea2d1540d1b8c6fcbc14"
+        },
+        {
+          "order": 4,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\senate-committees_distance_4.npy",
+          "size_bytes": 636320,
+          "sha256": "b77eaf66db14970f25a27711111bd53fa7e91c6a444585453b8d3ee491245d0b"
+        },
+        {
+          "order": 5,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\senate-committees_distance_5.npy",
+          "size_bytes": 636320,
+          "sha256": "af8995f99ad48553a52c2ad6e50edb5c11ffc76879ce7005cb00f7d9d064c316"
+        },
+        {
+          "order": 6,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\senate-committees_distance_6.npy",
+          "size_bytes": 636320,
+          "sha256": "c0179f71848d54ff4347f49425e7931c821fa5c4debfef137da5ef75726434dc"
+        },
+        {
+          "order": 7,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\senate-committees_distance_7.npy",
+          "size_bytes": 636320,
+          "sha256": "695a67cfa9503920a7be649d72f667235dea9268d11f9ce1edd7e6d63a96566f"
+        },
+        {
+          "order": 8,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\senate-committees_distance_8.npy",
+          "size_bytes": 636320,
+          "sha256": "241b824accf6bee1b6e836d9b48944e9f94187854292a12612947f5823b03d8d"
+        },
+        {
+          "order": 9,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\senate-committees_distance_9.npy",
+          "size_bytes": 636320,
+          "sha256": "f75f0dfec394c3bff4f40a904a1dea17ea2c6742e362bfd0e9c820d59cb7c44c"
+        },
+        {
+          "order": 10,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\senate-committees_distance_10.npy",
+          "size_bytes": 636320,
+          "sha256": "1cb0df04db80bdf2eca4e0797e812aa7d028f3de109191f27d2a898087d5a9cb"
+        }
+      ]
+    },
+    {
+      "dataset": "Restaurants-Rev",
+      "shape": [
+        565,
+        601
+      ],
+      "pool_size": 113,
+      "overlap": 57,
+      "ordered_pools_identical": false,
+      "first_order_shared_edge_violations": 0,
+      "all_orders_shortest_paths_verified": false,
+      "matrix_sha256": "306601085009b192be230e83ae0e9671b092cefaa45b95fe7ab4c0a68440bd92",
+      "cache_sources": [
+        {
+          "order": 1,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Restaurants-Rev_distance_1.npy",
+          "size_bytes": 2553928,
+          "sha256": "942016bfb602b336606fe27255c13727dcbc88cd99c10b3bfa6231e1b57abd61"
+        },
+        {
+          "order": 2,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Restaurants-Rev_distance_2.npy",
+          "size_bytes": 2553928,
+          "sha256": "a09c5fc128b6a4d725c81ac9a8468716bbf272471e7140f26542cae04dff7ac5"
+        },
+        {
+          "order": 3,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Restaurants-Rev_distance_3.npy",
+          "size_bytes": 2553928,
+          "sha256": "9e0ef9ee289e3471366d6303f7e512657c201f7c376f5769fa2f21c37567459e"
+        },
+        {
+          "order": 4,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Restaurants-Rev_distance_4.npy",
+          "size_bytes": 2553928,
+          "sha256": "f194e8d6218ff08a68de467b3d00e5a53430af8da1372fa242af0039acbf883f"
+        },
+        {
+          "order": 5,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Restaurants-Rev_distance_5.npy",
+          "size_bytes": 2553928,
+          "sha256": "b5bc9c0032e9d0655199b7c9aa9bc4b66d15d2097ab3fa050f8c46497250a8c4"
+        },
+        {
+          "order": 6,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Restaurants-Rev_distance_6.npy",
+          "size_bytes": 2553928,
+          "sha256": "d4360ab086c874ca8cd6df9196f874d1d13f6d315573c1240b795c10572d5b34"
+        },
+        {
+          "order": 7,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Restaurants-Rev_distance_7.npy",
+          "size_bytes": 2553928,
+          "sha256": "4e8ad2c167c02d00f658b15cdc2a2bb2d6d854c251ed4a01b3dcc1fde8d3bd77"
+        },
+        {
+          "order": 8,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Restaurants-Rev_distance_8.npy",
+          "size_bytes": 2553928,
+          "sha256": "71ddba89954afd04c29d761bd0c2d2bd391ee1feca03450cae024800e371c7ce"
+        },
+        {
+          "order": 9,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Restaurants-Rev_distance_9.npy",
+          "size_bytes": 2553928,
+          "sha256": "f60daf6fa8175c0727fc53351e1774164371ab54ad02d8d8522911da7e1983b7"
+        },
+        {
+          "order": 10,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Restaurants-Rev_distance_10.npy",
+          "size_bytes": 2553928,
+          "sha256": "98b43c11b831d2b8ebda236ace5b0a77ca06a3604148c6e9ca1ba33acf08271c"
+        }
+      ]
+    },
+    {
+      "dataset": "Geometry",
+      "shape": [
+        580,
+        1193
+      ],
+      "pool_size": 116,
+      "overlap": 112,
+      "ordered_pools_identical": false,
+      "first_order_shared_edge_violations": 0,
+      "all_orders_shortest_paths_verified": false,
+      "matrix_sha256": "7b2dc6d876650f1d20b0f98f74b7155064e3a9d7cecd6f8765211e2e1aaa8077",
+      "cache_sources": [
+        {
+          "order": 1,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Geometry_distance_1.npy",
+          "size_bytes": 2691328,
+          "sha256": "4f5c534e77f9963639f49c3d739a970e2ab317579965e279e7f9c0807641933a"
+        },
+        {
+          "order": 2,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Geometry_distance_2.npy",
+          "size_bytes": 2691328,
+          "sha256": "4ecef819e30c231e4cbb089e5c392fc6f56030df6c4f8aa1e1546cc950e461dc"
+        },
+        {
+          "order": 3,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Geometry_distance_3.npy",
+          "size_bytes": 2691328,
+          "sha256": "e7075ad8e639e20f1ba393d02bca3a1bf7ef7ca1fd1c6c4f37019c921919419e"
+        },
+        {
+          "order": 4,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Geometry_distance_4.npy",
+          "size_bytes": 2691328,
+          "sha256": "605bce0b6f501748df7dd250d4d6a03e975db239a6c792df7c4d1b8b75920778"
+        },
+        {
+          "order": 5,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Geometry_distance_5.npy",
+          "size_bytes": 2691328,
+          "sha256": "9871e0492c317ac0f1bcb215aab34ef15cca42d7d2a759841a4f122f5c8bcde4"
+        },
+        {
+          "order": 6,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Geometry_distance_6.npy",
+          "size_bytes": 2691328,
+          "sha256": "982481ee198cbb3919e551ec7536c9247b7c644620b0376160b929753a4f73d0"
+        },
+        {
+          "order": 7,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Geometry_distance_7.npy",
+          "size_bytes": 2691328,
+          "sha256": "5568a60e2dcc90edd55b1b2635e41d5062374d5917689832387423468bbaa3aa"
+        },
+        {
+          "order": 8,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Geometry_distance_8.npy",
+          "size_bytes": 2691328,
+          "sha256": "f902fd42630d1e175caa1d6fc97921f7706816e979ff6e470fd53d420845bd88"
+        },
+        {
+          "order": 9,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Geometry_distance_9.npy",
+          "size_bytes": 2691328,
+          "sha256": "128d74dd6914ae4b160f3db663844347c8efcc3d10c316a176c0e795a4718b4a"
+        },
+        {
+          "order": 10,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Geometry_distance_10.npy",
+          "size_bytes": 2691328,
+          "sha256": "d0f1637583b960beaa950f58a587476b42de1d8421b38ae0512cbcc47426dcbc"
+        }
+      ]
+    }
+  ],
+  "plan_id": "92be26d05e000e62b39fbb4972a466742a930bcd1578ced1f30dc8adde019590"
+}

@@ -1,0 +1,6 @@
+{
+  "dataset": "house-committees",
+  "reason": "Incidence matrix contains 0/1/2, not binary; no recoding or cache recomputation performed",
+  "replacement": "high-school_2012",
+  "replacement_before_any_training": true
+}

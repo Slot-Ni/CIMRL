@@ -110,3 +110,7 @@ A recent local revision environment used Windows 11, Intel Core i5-13500, approx
 ## Citation
 
 If using this code, cite the associated manuscript by its title above. Publication details and a DOI should be added when available.
+
+## Fixed reproducibility release
+
+Revision runners and frozen plans are now included in `revision_experiments/`. Download processed matrices, node mappings, ten-order caches and curated evidence from https://github.com/Slot-Ni/CIMRL/releases/tag/reproducibility-20261111 . See [reproducibility/README.md](reproducibility/README.md) for SHA-256 verification, portable commands, scope and known discrepancies. This supersedes the earlier statement that revision runners are not included. Weights and all historical outputs are not supplied. Cite the full commit linked by the release tag; d4632baf44c5679a68691b2b1e0152a49f99f0b9 identifies the earlier legacy code only.

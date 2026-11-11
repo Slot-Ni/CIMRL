@@ -1,0 +1,250 @@
+{
+  "datasets": [
+    "Music-Rev",
+    "NDC-classes",
+    "high-school_2012"
+  ],
+  "total_new_tasks": 30,
+  "repeats": 5,
+  "screening_orders": [
+    1,
+    10
+  ],
+  "feature_orders": 10,
+  "selection_basis": "size and existing-cache availability; no outcome-based selection",
+  "original_networks_retained": [
+    "Algebra",
+    "synthetic_HCL_v1000_e1000_exp2.5_maxdeg10",
+    "senate-committees",
+    "Restaurants-Rev",
+    "Geometry"
+  ],
+  "audit": [
+    {
+      "dataset": "Music-Rev",
+      "shape": [
+        1106,
+        694
+      ],
+      "pool_size": 221,
+      "overlap": 178,
+      "ordered_pools_identical": false,
+      "first_order_shared_edge_violations": 0,
+      "all_orders_shortest_paths_verified": false,
+      "matrix_sha256": "38857a29f495c43eaaa48375c754e2af21da7431bfdbd977a7cdd9354980590e",
+      "cache_sources": [
+        {
+          "order": 1,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Music-Rev_distance_1.npy",
+          "size_bytes": 9786016,
+          "sha256": "89fc99cf00404261d2a1a7230a87bbd6bb2f97be1f468ff48ececa3093981d1c"
+        },
+        {
+          "order": 2,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Music-Rev_distance_2.npy",
+          "size_bytes": 9786016,
+          "sha256": "206bfa6daa063c6bc5cb76ca66a01fff7e95368c346ca281968bb08231d2638c"
+        },
+        {
+          "order": 3,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Music-Rev_distance_3.npy",
+          "size_bytes": 9786016,
+          "sha256": "11b3adfb5a4da545af000244c8a4b8a5c98c6be5eac08df2d76efb4217d9e956"
+        },
+        {
+          "order": 4,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Music-Rev_distance_4.npy",
+          "size_bytes": 9786016,
+          "sha256": "11aaa2d74c36b7179a52e75788bac6a3c3dd24a54778eb3f0eb17731348e946e"
+        },
+        {
+          "order": 5,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Music-Rev_distance_5.npy",
+          "size_bytes": 9786016,
+          "sha256": "0cb21462c09adbcac33b50e6347189bb1238f3440e7a56f7b5eba7ee4523c206"
+        },
+        {
+          "order": 6,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Music-Rev_distance_6.npy",
+          "size_bytes": 9786016,
+          "sha256": "817981f11bff8358b2dee400d91fb53c455044ecf1158493fef89313d489c7a6"
+        },
+        {
+          "order": 7,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Music-Rev_distance_7.npy",
+          "size_bytes": 9786016,
+          "sha256": "db629754076d8e45881def4d1acb9878ef3f8523bec54fe5b495ea1c0d21b9fa"
+        },
+        {
+          "order": 8,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Music-Rev_distance_8.npy",
+          "size_bytes": 9786016,
+          "sha256": "d33260e66a6d17983fc0890838c098c631c1487cad01403d486dcb3166807f84"
+        },
+        {
+          "order": 9,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Music-Rev_distance_9.npy",
+          "size_bytes": 9786016,
+          "sha256": "fab2591ec573168df606bb26806ca5a6bd14af7c79c04085706bf6d912eda694"
+        },
+        {
+          "order": 10,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\Music-Rev_distance_10.npy",
+          "size_bytes": 9786016,
+          "sha256": "408cada1fa2c68183cab6b19a126926a6941833e281baefcde26ddf5b3142b8a"
+        }
+      ]
+    },
+    {
+      "dataset": "NDC-classes",
+      "shape": [
+        1161,
+        1088
+      ],
+      "pool_size": 232,
+      "overlap": 132,
+      "ordered_pools_identical": false,
+      "first_order_shared_edge_violations": 0,
+      "all_orders_shortest_paths_verified": false,
+      "matrix_sha256": "0fc57c936c3e004450ca6e7d0fa5a5da177849c430b61a7f9ad684c72878e960",
+      "cache_sources": [
+        {
+          "order": 1,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\NDC-classes_distance_1.npy",
+          "size_bytes": 10783496,
+          "sha256": "c1c5735bf009194736fc50ada4e724fb6fc4059a7393f41f1fde21dc4310eb2a"
+        },
+        {
+          "order": 2,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\NDC-classes_distance_2.npy",
+          "size_bytes": 10783496,
+          "sha256": "ecede62b0a21cb2a27819fdec8cd3b10bf2d7f8ff508bb38aef9ea2e54d2084c"
+        },
+        {
+          "order": 3,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\NDC-classes_distance_3.npy",
+          "size_bytes": 10783496,
+          "sha256": "f8deb0b71e3cffa680d903471e913e2a149e79cf08e67c41851bef032482de62"
+        },
+        {
+          "order": 4,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\NDC-classes_distance_4.npy",
+          "size_bytes": 10783496,
+          "sha256": "29c128ff988c6aef28d8a73ac4ed32605d531bd6c52b960d6b6f98893f4b47af"
+        },
+        {
+          "order": 5,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\NDC-classes_distance_5.npy",
+          "size_bytes": 10783496,
+          "sha256": "0309c35a3ec89e9f9d69ba40c4833c097832aef8efcbae78e4f76ed3bbf001e6"
+        },
+        {
+          "order": 6,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\NDC-classes_distance_6.npy",
+          "size_bytes": 10783496,
+          "sha256": "5dc916c7016f9b16874f26649be99cbb8b21f1e721977b5efee0c4d3f0e398d7"
+        },
+        {
+          "order": 7,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\NDC-classes_distance_7.npy",
+          "size_bytes": 10783496,
+          "sha256": "5f668d30743411c015057eca7194885ad14151602df42090a76b9d67a492f817"
+        },
+        {
+          "order": 8,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\NDC-classes_distance_8.npy",
+          "size_bytes": 10783496,
+          "sha256": "db53c20e660744bf97651cecf455de0a5f4c9fbce021a1d659e6e520f3b2a911"
+        },
+        {
+          "order": 9,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\NDC-classes_distance_9.npy",
+          "size_bytes": 10783496,
+          "sha256": "4331e04349987f2890c5b98672c8d8169baa63a7875e4ba4f244ce01b880d5a7"
+        },
+        {
+          "order": 10,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\NDC-classes_distance_10.npy",
+          "size_bytes": 10783496,
+          "sha256": "589335b0974bc7dcbb0c3ed2f4904976a5224fec7cd7810b3e626fc90830e233"
+        }
+      ]
+    },
+    {
+      "dataset": "high-school_2012",
+      "shape": [
+        1257,
+        2078
+      ],
+      "pool_size": 251,
+      "overlap": 251,
+      "ordered_pools_identical": false,
+      "first_order_shared_edge_violations": 0,
+      "all_orders_shortest_paths_verified": false,
+      "matrix_sha256": "3f93d473f76005e8d96a359e3042f99b581cec91fdd939623f6750a8fdf7a029",
+      "cache_sources": [
+        {
+          "order": 1,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\high-school_2012_distance_1.npy",
+          "size_bytes": 12640520,
+          "sha256": "a5020e1bfb36de476a895b430b5bf923c6acb378c3b641689de3d219dbfb45d1"
+        },
+        {
+          "order": 2,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\high-school_2012_distance_2.npy",
+          "size_bytes": 12640520,
+          "sha256": "802903a16f0c55d16cb5b36d4ee2ad1632cad4e0316ffebeae3e76e57da3c642"
+        },
+        {
+          "order": 3,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\high-school_2012_distance_3.npy",
+          "size_bytes": 12640520,
+          "sha256": "36b3dd91870e4a7f81717a8e22ef2e230053ea77d95d56ba1d778281de2d6af6"
+        },
+        {
+          "order": 4,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\high-school_2012_distance_4.npy",
+          "size_bytes": 12640520,
+          "sha256": "8c77c6ff7e8e6f60defd586c046f232342819d24081b2fa68112822b02a9c82c"
+        },
+        {
+          "order": 5,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\high-school_2012_distance_5.npy",
+          "size_bytes": 12640520,
+          "sha256": "4902ba4dace0f050238bf0fae9e7f69d6414d83f2ebff232de48aeb4744bdb84"
+        },
+        {
+          "order": 6,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\high-school_2012_distance_6.npy",
+          "size_bytes": 12640520,
+          "sha256": "e5b39840afd79aaf67cd7742b920718f0a66f22ff1843758dcb2cc388a9b1eee"
+        },
+        {
+          "order": 7,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\high-school_2012_distance_7.npy",
+          "size_bytes": 12640520,
+          "sha256": "e5b39840afd79aaf67cd7742b920718f0a66f22ff1843758dcb2cc388a9b1eee"
+        },
+        {
+          "order": 8,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\high-school_2012_distance_8.npy",
+          "size_bytes": 12640520,
+          "sha256": "e5b39840afd79aaf67cd7742b920718f0a66f22ff1843758dcb2cc388a9b1eee"
+        },
+        {
+          "order": 9,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\high-school_2012_distance_9.npy",
+          "size_bytes": 12640520,
+          "sha256": "e5b39840afd79aaf67cd7742b920718f0a66f22ff1843758dcb2cc388a9b1eee"
+        },
+        {
+          "order": 10,
+          "path": "D:\\YX\\Hyper_Distance\\Hyper_Distance\\high-school_2012_distance_10.npy",
+          "size_bytes": 12640520,
+          "sha256": "e5b39840afd79aaf67cd7742b920718f0a66f22ff1843758dcb2cc388a9b1eee"
+        }
+      ]
+    }
+  ],
+  "plan_id": "3d093f18144de62bafcb78e2677b4ae15b0a9b97d41befb7b386640a1ff326ae"
+}

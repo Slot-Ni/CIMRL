@@ -1,4 +1,1 @@
-# Code availability
-
-The source code for this project is available in this repository. Large input datasets and generated result files are not tracked in version control because of their size, but the reported figures and tables can be reproduced from the included scripts when the required data are placed in `HyperGraphMatrix/`.
-
+Source and revision runners are in this repository. Data/cache/evidence assets: https://github.com/Slot-Ni/CIMRL/releases/tag/reproducibility-20261111 . See reproducibility/README.md for file hashes, execution instructions and known limitations. Cite the full release-tagged commit. Model weights and all historical outputs are not included.

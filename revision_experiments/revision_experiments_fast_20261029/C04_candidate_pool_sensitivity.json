@@ -1,0 +1,43 @@
+{
+  "data_root": "../../HyperGraphMatrix",
+  "datasets": [
+    "Algebra",
+    "synthetic_HCL_v1000_e1000_exp2.5_maxdeg10"
+  ],
+  "orders": 10,
+  "alpha": 0.5,
+  "budget": 10,
+  "ratios": [
+    0.05,
+    0.1,
+    0.2,
+    0.4,
+    1.0
+  ],
+  "modes": [
+    "product"
+  ],
+  "methods": [
+    "dqn"
+  ],
+  "beta": 0.03,
+  "horizon": 30,
+  "episodes": 600,
+  "train_simulations": 50,
+  "eval_simulations": 1000,
+  "repeats": 5,
+  "learning_rate": 0.03,
+  "gamma": 0.9,
+  "batch_size": 64,
+  "replay_capacity": 30000,
+  "target_update_steps": 100,
+  "seed": 20261027,
+  "review_comment_ids": [
+    4,
+    7,
+    8
+  ],
+  "experiment_id": "C04_candidate_pool_sensitivity",
+  "cache_root": "../../Hyper_Distance",
+  "distance_source": "existing_cache"
+}

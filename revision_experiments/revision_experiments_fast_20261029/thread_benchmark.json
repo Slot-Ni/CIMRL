@@ -1,0 +1,14 @@
+[
+  {
+    "threads": 1,
+    "forward_backward_batch8_seconds": 0.3700385997071862
+  },
+  {
+    "threads": 2,
+    "forward_backward_batch8_seconds": 0.3339754999615252
+  },
+  {
+    "threads": 4,
+    "forward_backward_batch8_seconds": 0.3118704999797046
+  }
+]
