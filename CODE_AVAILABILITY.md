@@ -1,1 +1,3 @@
-Source and revision runners are in this repository. Data/cache/evidence assets: https://github.com/Slot-Ni/CIMRL/releases/tag/reproducibility-20261111 . See reproducibility/README.md for file hashes, execution instructions and known limitations. Cite the full release-tagged commit. Model weights and all historical outputs are not included.
+# Code availability
+
+The current branch provides the main experiment source and execution guidance. Processed matrices, node mappings and historical distance-cache archives remain in the data release. Model weights and a complete archive of historical outputs are not provided. Git history preserves previous versions; current files should not be taken as verification of all historical manuscript results. Record the full commit hash used for any execution.
