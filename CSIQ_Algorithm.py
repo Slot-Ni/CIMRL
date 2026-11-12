@@ -25,7 +25,7 @@ def get_CSIQ_seeds(G_matrix, NodeList, data_name, num_v, beta, T, device):
     epsilon_start = 0.5
     epsilon_end = 0.01
     epsilon_decay = (epsilon_start - epsilon_end) / num_episodes
-    simulation_num = 500
+    simulation_num = 50
     batch_size = 64
     buffer_capacity = 30000
     state_dim = 2 * num_v
@@ -84,7 +84,7 @@ def get_CSIQ_seeds(G_matrix, NodeList, data_name, num_v, beta, T, device):
             state_encoded = agent._encode_state(state)
             next_state_encoded = agent._encode_state(next_state)
 
-            replay_buffer.add(state_encoded, action_index, reward, next_state_encoded, done)
+            replay_buffer.add(state_encoded, action_index, reward, next_state_encoded, done, np.array([v not in next_state for v in CandidateNodes_pos], dtype=bool))
 
             if len(replay_buffer) >= batch_size:
                 batch = replay_buffer.sample(batch_size)

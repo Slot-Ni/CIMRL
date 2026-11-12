@@ -76,13 +76,13 @@ def process_data(data):
     T = 30
 
     # DQN训练参数
-    num_episodes = 300
-    alpha = 0.01
-    gamma = 0.8
+    num_episodes = 600
+    alpha = 0.03
+    gamma = 0.9
     epsilon_start = 0.5
     epsilon_end = 0.01
     epsilon_decay = (epsilon_start - epsilon_end) / num_episodes
-    simulation_num = 35
+    simulation_num = 50
     batch_size = 64
     buffer_capacity = 30000
     target_update_freq = 100
@@ -356,8 +356,8 @@ if __name__ == '__main__':
 #     # DQN训练参数
 #     num_episodes = 400
 #     # num_episodes = 600
-#     alpha = 0.01
-#     gamma = 0.8
+#     alpha = 0.03
+#     gamma = 0.9
 #     epsilon_start = 0.5
 #     epsilon_end = 0.01
 #     epsilon_decay = (epsilon_start - epsilon_end) / num_episodes

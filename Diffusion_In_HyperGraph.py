@@ -25,246 +25,20 @@ def _get_preprocessed_graph(G_matrix):
 
 
 def HG_Diffusion_SICP(G_matrix, NodeList, SeedNodes, BlockNodes, beta, T, seed=None):
-    """
-    该函数实现了HG_Diffusion_SICP优化的扩散过程。
+    """Synchronous irreversible ACHPD; competitor wins simultaneous attempts."""
+    target = list(BlockNodes) if False else [NodeList.index(v) for v in BlockNodes]
+    rival = [NodeList.index(v) for v in SeedNodes]
+    return _paper_diffusion(G_matrix, rival, target, beta, T, seed)
 
-    参数:
-    G_matrix (numpy.ndarray): 超图的邻接矩阵，形状为(num_nodes, num_hyperedges)
-    NodeList (list): 节点名称列表
-    SeedNodes (list): 初始谣言节点名称列表
-    BlockNodes (list): 初始阻塞节点名称列表
-    beta (float): 激活概率
-    T (int): 扩散的时间步数
-
-    返回:
-    tuple: 包含节点总数、未激活节点数、谣言节点数和阻塞节点数的元组
-    """
-
-    # 添加seed参数
-    if seed is not None:
-        np.random.seed(seed)  # 固定随机种子
-    # 预处理：预计算所有超边的节点列表和节点的超边列表
-    # 获取节点数量和超边数量
-    num_nodes, num_hyperedges, hyperedge_nodes, node_hyperedges = _get_preprocessed_graph(G_matrix)
-    # 对于每个超边，找出与之相连的节点的索引
-    # 对于每个节点，找出与之相连的超边的索引
-
-    # 预生成所有节点的超边选择（形状：[num_nodes, T]）
-    # 初始化超边选择数组，初始值为 -1
-    hyperedge_choices = np.full((num_nodes, T), -1, dtype=int)
-    # 遍历每个节点
-    for idx in range(num_nodes):
-        # 获取该节点相连的超边索引
-        hes = node_hyperedges[idx]
-        # 如果该节点有相连的超边
-        if len(hes) > 0:
-            rng = np.random.RandomState(seed) if seed is not None else np.random
-            # 为该节点在每个时间步随机选择一个超边
-            hyperedge_choices[idx] = np.random.choice(hes, size=T)
-
-    # 转换节点名为索引
-    # 将阻塞节点名称转换为对应的索引
-    BlockNodes_index = [NodeList.index(node) for node in BlockNodes]
-    # 将谣言节点名称转换为对应的索引
-    RumorNodes_index = [NodeList.index(node) for node in SeedNodes]
-
-    # 初始化状态（1: 阻塞, -1: 谣言, 0: 未激活）
-    # 初始化节点状态数组，初始值为 0
-    StateList = np.zeros(num_nodes, dtype=np.int8)
-    # 将阻塞节点的状态设置为 1
-    StateList[BlockNodes_index] = 1
-    # 将谣言节点的状态设置为 -1
-    StateList[RumorNodes_index] = -1
-
-    # 使用集合存储激活节点
-    # 将阻塞节点索引转换为集合
-    BlockNodes_set = set(BlockNodes_index)
-    # 将谣言节点索引转换为集合
-    RumorNodes_set = set(RumorNodes_index)
-
-    # 进行 T 个时间步的扩散
-    for t in range(T):
-        # 处理阻塞节点传播
-        # 如果有阻塞节点
-        if BlockNodes_set:
-            # 将阻塞节点集合转换为数组
-            active_block = np.array(list(BlockNodes_set))
-            # 获取当前时间步这些阻塞节点选择的超边
-            current_hyper = hyperedge_choices[active_block, t]
-            # 筛选出选择了有效超边的节点
-            valid_mask = current_hyper != -1
-            valid_actives = active_block[valid_mask]
-            valid_hes = current_hyper[valid_mask]
-
-            # 如果有有效激活的阻塞节点
-            if valid_actives.size > 0:
-                # 获取这些有效超边所连接的所有邻居节点
-                all_neighbors = np.concatenate([hyperedge_nodes[he] for he in valid_hes])
-                # 筛选出未激活的邻居节点
-                unactivated = all_neighbors[StateList[all_neighbors] == 0]
-                # 如果有未激活的邻居节点
-                if unactivated.size > 0:
-                    # 根据激活概率随机选择要激活的节点
-                    activated = unactivated[np.random.random(unactivated.size) <= beta]
-                    # 将这些激活的节点状态设置为 1
-                    StateList[activated] = 1
-                    # 将这些激活的节点添加到阻塞节点集合中
-                    BlockNodes_set.update(activated.tolist())
-
-        # 处理谣言节点传播
-        # 如果有谣言节点
-        if RumorNodes_set:
-            # 将谣言节点集合转换为数组
-            active_rumor = np.array(list(RumorNodes_set))
-            # 获取当前时间步这些谣言节点选择的超边
-            current_hyper = hyperedge_choices[active_rumor, t]
-            # 筛选出选择了有效超边的节点
-            valid_mask = current_hyper != -1
-            valid_actives = active_rumor[valid_mask]
-            valid_hes = current_hyper[valid_mask]
-
-            # 如果有有效激活的谣言节点
-            if valid_actives.size > 0:
-                # 获取这些有效超边所连接的所有邻居节点
-                all_neighbors = np.concatenate([hyperedge_nodes[he] for he in valid_hes])
-                # 筛选出未激活的邻居节点
-                unactivated = all_neighbors[StateList[all_neighbors] == 0]
-                # 如果有未激活的邻居节点
-                if unactivated.size > 0:
-                    # 根据激活概率随机选择要激活的节点
-                    activated = unactivated[np.random.random(unactivated.size) <= beta]
-                    # 将这些激活的节点状态设置为 -1
-                    StateList[activated] = -1
-                    # 将这些激活的节点添加到谣言节点集合中
-                    RumorNodes_set.update(activated.tolist())
-
-    # 统计结果
-    # 统计未激活节点的数量
-    unactivated_number = np.sum(StateList == 0)
-    # 返回节点总数、未激活节点数、谣言节点数和阻塞节点数
-    return len(NodeList), unactivated_number, len(RumorNodes_set), len(BlockNodes_set)
 
 
 
 def HG_Diffusion_SICP_pos(G_matrix, NodeList, SeedNodes, BlockNodes_pos, beta, T, seed=None):
-    """
-    该函数实现了HG_Diffusion_SICP_pos优化的扩散过程。
+    """Synchronous irreversible ACHPD; competitor wins simultaneous attempts."""
+    target = list(BlockNodes_pos) if True else [NodeList.index(v) for v in BlockNodes_pos]
+    rival = [NodeList.index(v) for v in SeedNodes]
+    return _paper_diffusion(G_matrix, rival, target, beta, T, seed)
 
-    参数:
-    G_matrix (numpy.ndarray): 超图的邻接矩阵，形状为(num_nodes, num_hyperedges)
-    NodeList (list): 节点名称列表
-    SeedNodes (list): 初始谣言节点名称列表
-    BlockNodes_pos (list): 初始阻塞节点的索引列表
-    beta (float): 激活概率
-    T (int): 扩散的时间步数
-
-    返回:
-    tuple: 包含节点总数、未激活节点数、谣言节点数和阻塞节点数的元组
-    """
-
-    # 添加seed参数
-    if seed is not None:
-        np.random.seed(seed)  # 固定随机种子
-    # 预处理与上述函数相同，仅BlockNodes_index处理不同
-    # 获取节点数量和超边数量
-    num_nodes, num_hyperedges, hyperedge_nodes, node_hyperedges = _get_preprocessed_graph(G_matrix)
-    # 对于每个超边，找出与之相连的节点的索引
-    # 对于每个节点，找出与之相连的超边的索引
-
-    # 预生成所有节点的超边选择（形状：[num_nodes, T]）
-    # 初始化超边选择数组，初始值为 -1
-    hyperedge_choices = np.full((num_nodes, T), -1, dtype=int)
-    # 遍历每个节点
-    for idx in range(num_nodes):
-        # 获取该节点相连的超边索引
-        hes = node_hyperedges[idx]
-        # 如果该节点有相连的超边
-        if len(hes) > 0:
-            # 使用固定种子生成随机选择
-            rng = np.random.RandomState(seed) if seed is not None else np.random
-            # 为该节点在每个时间步随机选择一个超边
-            hyperedge_choices[idx] = np.random.choice(hes, size=T)
-
-    # 这里直接使用传入的阻塞节点索引
-    BlockNodes_index = BlockNodes_pos
-    # 将谣言节点名称转换为对应的索引
-    RumorNodes_index = [NodeList.index(node) for node in SeedNodes]
-
-    # 初始化状态（1: 阻塞, -1: 谣言, 0: 未激活）
-    # 初始化节点状态数组，初始值为 0
-    StateList = np.zeros(num_nodes, dtype=np.int8)
-    # 将阻塞节点的状态设置为 1
-    StateList[BlockNodes_index] = 1
-    # 将谣言节点的状态设置为 -1
-    StateList[RumorNodes_index] = -1
-
-    # 使用集合存储激活节点
-    # 将阻塞节点索引转换为集合
-    BlockNodes_set = set(BlockNodes_index)
-    # 将谣言节点索引转换为集合
-    RumorNodes_set = set(RumorNodes_index)
-
-    # 进行 T 个时间步的扩散
-    for t in range(T):
-        # 处理阻塞节点传播
-        # 如果有阻塞节点
-        if BlockNodes_set:
-            # 将阻塞节点集合转换为数组
-            active_block = np.array(list(BlockNodes_set))
-            # 获取当前时间步这些阻塞节点选择的超边
-            current_hyper = hyperedge_choices[active_block, t]
-            # 筛选出选择了有效超边的节点
-            valid_mask = current_hyper != -1
-            valid_actives = active_block[valid_mask]
-            valid_hes = current_hyper[valid_mask]
-
-            # 如果有有效激活的阻塞节点
-            if valid_actives.size > 0:
-                # 获取这些有效超边所连接的所有邻居节点
-                all_neighbors = np.concatenate([hyperedge_nodes[he] for he in valid_hes])
-                # 筛选出未激活的邻居节点
-                unactivated = all_neighbors[StateList[all_neighbors] == 0]
-                # 如果有未激活的邻居节点
-                if unactivated.size > 0:
-                    # 根据激活概率随机选择要激活的节点
-                    activated = unactivated[np.random.random(unactivated.size) <= beta]
-                    # 将这些激活的节点状态设置为 1
-                    StateList[activated] = 1
-                    # 将这些激活的节点添加到阻塞节点集合中
-                    BlockNodes_set.update(activated.tolist())
-
-        # 处理谣言节点传播
-        # 如果有谣言节点
-        if RumorNodes_set:
-            # 将谣言节点集合转换为数组
-            active_rumor = np.array(list(RumorNodes_set))
-            # 获取当前时间步这些谣言节点选择的超边
-            current_hyper = hyperedge_choices[active_rumor, t]
-            # 筛选出选择了有效超边的节点
-            valid_mask = current_hyper != -1
-            valid_actives = active_rumor[valid_mask]
-            valid_hes = current_hyper[valid_mask]
-
-            # 如果有有效激活的谣言节点
-            if valid_actives.size > 0:
-                # 获取这些有效超边所连接的所有邻居节点
-                all_neighbors = np.concatenate([hyperedge_nodes[he] for he in valid_hes])
-                # 筛选出未激活的邻居节点
-                unactivated = all_neighbors[StateList[all_neighbors] == 0]
-                # 如果有未激活的邻居节点
-                if unactivated.size > 0:
-                    # 根据激活概率随机选择要激活的节点
-                    activated = unactivated[np.random.random(unactivated.size) <= beta]
-                    # 将这些激活的节点状态设置为 -1
-                    StateList[activated] = -1
-                    # 将这些激活的节点添加到谣言节点集合中
-                    RumorNodes_set.update(activated.tolist())
-
-    # 统计结果
-    # 统计未激活节点的数量
-    unactivated_number = np.sum(StateList == 0)
-    # 返回节点总数、未激活节点数、谣言节点数和阻塞节点数
-    return len(NodeList), unactivated_number, len(RumorNodes_set), len(BlockNodes_set)
 
 
 def _run_simulation(diffusion_func, task_args):
@@ -296,9 +70,9 @@ def _run_simulation(diffusion_func, task_args):
         gc.collect()
 
 
-def Simulations(simulation_num, diffusion_func, shm_name, dtype, shape, *args):
+def Simulations(simulation_num, diffusion_func, shm_name, dtype, shape, *args, seed_base=42):
     """并行执行多次扩散模拟"""
-    base_seed = 42
+    base_seed = seed_base
     seeds = [base_seed + i for i in range(simulation_num)]
     tasks = [(shm_name, dtype, shape) + args + (seed,) for seed in seeds]
 
@@ -582,3 +356,32 @@ def Simulations_track_tqdm(simulation_num, diffusion_func, shm_name, dtype, shap
 
     return avg_series
 
+
+
+def _paper_diffusion(matrix, rivals, targets, beta, horizon, seed=None):
+    if not 0 <= beta <= 1 or horizon < 0:
+        raise ValueError('Invalid propagation parameters')
+    if set(rivals) & set(targets):
+        raise ValueError('Competing and target seeds must be disjoint')
+    rng = np.random.default_rng(seed)
+    n = len(matrix)
+    incident = [np.flatnonzero(row) for row in matrix]
+    members = [np.flatnonzero(col) for col in matrix.T]
+    state = np.zeros(n, dtype=np.int8)
+    state[rivals] = -1
+    state[targets] = 1
+    for _ in range(horizon):
+        susceptible = state == 0
+        rival_hits = np.zeros(n, dtype=bool)
+        target_hits = np.zeros(n, dtype=bool)
+        for source in np.flatnonzero(state):
+            if not len(incident[source]):
+                continue
+            edge = rng.choice(incident[source])
+            available = members[edge][susceptible[members[edge]]]
+            hit = available[rng.random(len(available)) < beta]
+            (rival_hits if state[source] == -1 else target_hits)[hit] = True
+        # Both masks were computed from the same beginning-of-round state.
+        state[susceptible & target_hits & ~rival_hits] = 1
+        state[susceptible & rival_hits] = -1
+    return n, int(np.sum(state == 0)), int(np.sum(state == -1)), int(np.sum(state == 1))

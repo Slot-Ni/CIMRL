@@ -53,7 +53,7 @@ class Compete_DQN:
             for node in state:
                 hyperedge_avgsize = self.node_hyperedge_avgsize[node]  # 节点平均超边大小
                 higerorder = self.avg_HigerOrder_dis_seednodes[node]  # 获取节点与种子节点的高阶距离
-                features.extend([hyperedge_avgsize, higerorder])  # 节点平均超边大小
+                features.extend([higerorder, hyperedge_avgsize])  # 节点平均超边大小
             features = features[:self.state_dim] + [0] * (self.state_dim - len(features))  # 截断或填充至固定长度
             return np.array(features)
 
@@ -75,7 +75,7 @@ class Compete_DQN:
                 return selected_node, selected_index  # 返回节点位置和索引
 
     def update(self, batch):
-        states, actions, rewards, next_states, dones = batch  # 从采样的批次数据中解包出状态、动作、奖励、下一个状态和是否结束的标志
+        states, actions, rewards, next_states, dones, next_masks = batch  # 从采样的批次数据中解包出状态、动作、奖励、下一个状态和是否结束的标志
         states = torch.FloatTensor(np.array(states)).to(self.device)  # 将状态数据转换为NumPy数组，再转换为FloatTensor类型的张量，并移动到指定设备（CPU或GPU）上
         actions = torch.LongTensor(actions).unsqueeze(1).to(self.device)  # 将动作数据转换为LongTensor类型的张量，并增加一个维度，使其形状为 [batch_size, 1]，然后移动到指定设备上
         rewards = torch.FloatTensor(rewards).to(self.device)  # 将奖励数据转换为FloatTensor类型的张量，并移动到指定设备上
@@ -88,7 +88,12 @@ class Compete_DQN:
         # 计算目标Q值
         # 关闭梯度计算，因为目标网络的参数在这一步不需要更新
         with torch.no_grad():
-            next_q = self.target_net(next_states).max(1)[0]   # 计算下一个状态下所有动作的Q值，并取最大值，得到每个样本的最大Q值
+            values = self.target_net(next_states)
+            masks = torch.as_tensor(np.asarray(next_masks), dtype=torch.bool, device=self.device)
+            if torch.any((~masks.any(dim=1)) & (dones == 0)):
+                raise ValueError('Nonterminal transition has no legal action')
+            values = values.masked_fill(~masks, float('-inf'))
+            next_q = torch.where(dones.bool(), torch.zeros_like(dones), values.max(1)[0])   # 计算下一个状态下所有动作的Q值，并取最大值，得到每个样本的最大Q值
 
             # 根据贝尔曼方程计算目标Q值
             # 当 dones 为 1 时，表示该回合结束，此时目标Q值仅为当前奖励
@@ -121,8 +126,10 @@ class ReplayBuffer:
     def __init__(self, capacity):  # capacity是传入的参数，代表缓冲区所能容纳的最大经验数量。
         self.buffer = deque(maxlen=capacity)
 
-    def add(self, state, action, reward, next_state, done):  # add方法的作用是把一个经验元组添加到缓冲区里。
-        self.buffer.append((state, action, reward, next_state, done))
+    def add(self, state, action, reward, next_state, done, next_mask=None):  # add方法的作用是把一个经验元组添加到缓冲区里。
+        if next_mask is None:
+            raise ValueError('Replay transition requires explicit next-action mask')
+        self.buffer.append((state, action, reward, next_state, done, np.asarray(next_mask,dtype=bool)))
 
     def sample(self, batch_size):  # sample方法的用途是从缓冲区里随机采样出一个批次的经验数据。batch_size是传入的参数，代表要采样的经验数量。
         return random.sample(self.buffer, batch_size)
